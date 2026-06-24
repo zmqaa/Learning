@@ -24,11 +24,11 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="学习助手 API", lifespan=lifespan)
+app = FastAPI(title="LearnLab API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "https://learning.zmqaa.com", "http://learning.zmqaa.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -119,13 +119,20 @@ def create_skill(req: CreateSkillRequest):
 
 
 @app.get("/api/skills")
-def list_skills():
-    """获取所有技能列表"""
+def list_skills(search: str = "", sort: str = "created"):
+    """获取所有专题列表，支持搜索和排序"""
     conn = get_db()
     try:
-        rows = conn.execute(
-            "SELECT id, name, description, created_at FROM skills ORDER BY created_at DESC"
-        ).fetchall()
+        query = "SELECT id, name, description, created_at, view_count FROM skills"
+        params = []
+        if search:
+            query += " WHERE name LIKE ?"
+            params.append(f"%{search}%")
+        if sort == "views":
+            query += " ORDER BY view_count DESC, created_at DESC"
+        else:
+            query += " ORDER BY created_at DESC"
+        rows = conn.execute(query, params).fetchall()
         return {"skills": [row_to_dict(r) for r in rows]}
     finally:
         conn.close()
@@ -137,7 +144,7 @@ def get_skill(skill_id: int):
     conn = get_db()
     try:
         skill = conn.execute(
-            "SELECT id, name, description, created_at FROM skills WHERE id = ?",
+            "SELECT id, name, description, created_at, view_count FROM skills WHERE id = ?",
             (skill_id,),
         ).fetchone()
 
@@ -175,6 +182,21 @@ def delete_skill(skill_id: int):
     conn = get_db()
     try:
         conn.execute("DELETE FROM skills WHERE id = ?", (skill_id,))
+        conn.commit()
+        return {"ok": True}
+    finally:
+        conn.close()
+
+
+@app.post("/api/skills/{skill_id}/view")
+def increment_view(skill_id: int):
+    """增加专题访问计数"""
+    conn = get_db()
+    try:
+        conn.execute(
+            "UPDATE skills SET view_count = view_count + 1 WHERE id = ?",
+            (skill_id,),
+        )
         conn.commit()
         return {"ok": True}
     finally:

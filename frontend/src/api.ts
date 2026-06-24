@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = '/api';
 
 async function fetchJSON<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
@@ -94,9 +94,13 @@ export async function fetchSSE(
   }
 }
 
-// ── 技能 ────────────────────────────────────────────────────────
-export async function listSkills() {
-  return fetchJSON<{ skills: any[] }>(`${API_BASE}/skills`);
+// ── 专题 ────────────────────────────────────────────────────────
+export async function listSkills(search?: string, sort?: string) {
+  const params = new URLSearchParams();
+  if (search) params.set('search', search);
+  if (sort) params.set('sort', sort);
+  const qs = params.toString();
+  return fetchJSON<{ skills: any[] }>(`${API_BASE}/skills${qs ? '?' + qs : ''}`);
 }
 
 export async function getSkill(id: number) {
@@ -112,6 +116,10 @@ export async function createSkill(name: string, description?: string) {
 
 export async function deleteSkill(id: number) {
   return fetchJSON<any>(`${API_BASE}/skills/${id}`, { method: 'DELETE' });
+}
+
+export async function incrementViewCount(id: number) {
+  return fetchJSON<any>(`${API_BASE}/skills/${id}/view`, { method: 'POST' });
 }
 
 // ── 小章节 ──────────────────────────────────────────────────────

@@ -1,9 +1,10 @@
-// ── 技能 ────────────────────────────────────────────────────────
+// ── 专题 ────────────────────────────────────────────────────────
 export interface Skill {
   id: number;
   name: string;
   description: string;
   created_at: string;
+  view_count?: number;
   chapters?: Chapter[];
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getSkill } from '../api';
+import { getSkill, incrementViewCount } from '../api';
 import Sidebar from '../components/Sidebar';
 import SubChapterView from '../components/SubChapterView';
 import type { Skill } from '../types';
@@ -15,13 +15,13 @@ export default function SkillPage() {
   const [error, setError] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const loadSkill = useCallback(async () => {
+  const loadSkill = useCallback(async (skipAutoSelect = false) => {
     if (!skillId) return;
     setLoading(true);
     try {
       const data = await getSkill(Number(skillId));
       setSkill(data);
-      if (data.chapters?.length > 0) {
+      if (!skipAutoSelect && data.chapters?.length > 0) {
         const firstSC = data.chapters[0].sub_chapters?.[0];
         if (firstSC) {
           setSelectedSCId(firstSC.id);
@@ -36,7 +36,10 @@ export default function SkillPage() {
 
   useEffect(() => {
     loadSkill();
-  }, [loadSkill]);
+    if (skillId) {
+      incrementViewCount(Number(skillId)).catch(() => {});
+    }
+  }, [loadSkill, skillId]);
 
   // 切换子章节时关闭侧边栏（移动端）
   const handleSelectSubChapter = (scId: number) => {
@@ -45,7 +48,7 @@ export default function SkillPage() {
   };
 
   const handleContentUpdated = () => {
-    loadSkill();
+    loadSkill(true); // 只刷新专题数据，不跳到第一个章节
   };
 
   if (loading) {
@@ -60,7 +63,7 @@ export default function SkillPage() {
   if (error || !skill) {
     return (
       <div className="skill-page-loading">
-        <p className="error-msg">{error || '技能不存在'}</p>
+        <p className="error-msg">{error || '专题不存在'}</p>
         <button className="btn btn-outline" onClick={() => navigate('/')}>
           返回首页
         </button>
