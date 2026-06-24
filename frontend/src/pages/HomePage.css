@@ -1,0 +1,179 @@
+.home-page {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.home-container {
+  width: 100%;
+  max-width: 800px;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.home-header h1 {
+  font-size: 42px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.home-subtitle {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* ── 创建区域 ───────────────────────────────────────────────── */
+.create-section {
+  margin-bottom: 48px;
+}
+
+.create-input-group {
+  display: flex;
+  gap: 12px;
+}
+
+.create-input-group input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid var(--border-input);
+  border-radius: 12px;
+  font-size: 15px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+
+.create-input-group input:focus {
+  border-color: var(--border-input-focus);
+  background: var(--bg-input-focus);
+}
+
+.create-input-group input::placeholder {
+  color: var(--text-hint);
+}
+
+.error-msg {
+  color: var(--color-error);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* ── 技能列表 ───────────────────────────────────────────────── */
+.skills-section h2 {
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.loading-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  color: var(--text-muted);
+}
+
+.empty-state .hint {
+  font-size: 14px;
+  margin-top: 8px;
+  color: var(--text-hint);
+}
+
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skill-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.skill-card:hover {
+  border-color: var(--color-brand);
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.skill-card-body h3 {
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.skill-card-body p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.skill-date {
+  font-size: 12px;
+  color: var(--text-hint);
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.skill-delete {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.skill-card:hover .skill-delete {
+  opacity: 1;
+}
+
+/* ── 移动端 ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .home-page {
+    padding: 24px 16px;
+  }
+
+  .home-header h1 {
+    font-size: 28px;
+  }
+
+  .home-subtitle {
+    font-size: 14px;
+  }
+
+  .create-input-group {
+    flex-direction: column;
+  }
+
+  .create-input-group input {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .create-input-group .btn {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .skill-card {
+    padding: 16px;
+  }
+
+  .skill-card-body h3 {
+    font-size: 16px;
+  }
+}

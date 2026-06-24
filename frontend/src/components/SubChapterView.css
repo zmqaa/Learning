@@ -1,0 +1,317 @@
+.sub-chapter-view {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ── 面包屑 ────────────────────────────────────────────────── */
+.sc-breadcrumb {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.sc-breadcrumb .sep {
+  margin: 0 8px;
+  color: var(--text-hint);
+}
+
+.sc-breadcrumb .current {
+  color: var(--color-brand);
+  font-weight: 500;
+}
+
+/* ── 左右分栏 ─────────────────────────────────────────────── */
+.sc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.sc-left {
+  position: sticky;
+  top: 16px;
+}
+
+.sc-right {
+  min-width: 0;
+}
+
+.sc-right-title {
+  font-size: 18px;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+/* ── 空状态 ───────────────────────────────────────────────── */
+.sc-empty {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.sc-empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+}
+
+.sc-empty h3 {
+  font-size: 22px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.sc-empty p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+/* ── 知识点卡片 ───────────────────────────────────────────── */
+.sc-kp-section {
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.sc-section-header h3 {
+  font-size: 16px;
+  padding: 16px 24px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.sc-section-toggle.collapsed {
+  border-bottom: none;
+}
+
+.toggle-arrow {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sc-kp-content {
+  padding: 24px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.sc-kp-content h1,
+.sc-kp-content h2,
+.sc-kp-content h3 {
+  color: var(--text-primary);
+  margin: 20px 0 10px;
+}
+
+.sc-kp-content h1:first-child,
+.sc-kp-content h2:first-child,
+.sc-kp-content h3:first-child {
+  margin-top: 0;
+}
+
+.sc-kp-content p {
+  margin-bottom: 12px;
+}
+
+.sc-kp-content ul,
+.sc-kp-content ol {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.sc-kp-content li {
+  margin-bottom: 4px;
+}
+
+.sc-kp-content code {
+  background: var(--inline-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--inline-code-fg);
+  font-weight: 500;
+}
+
+.sc-kp-content pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+  border: 1px solid var(--code-border);
+}
+
+.sc-kp-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.sc-kp-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.sc-kp-content th,
+.sc-kp-content td {
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.sc-kp-content th {
+  background: var(--bg-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sc-kp-content td {
+  color: var(--text-secondary);
+}
+
+.sc-kp-content tr:nth-child(even) td {
+  background: var(--bg-card);
+}
+
+.sc-kp-content strong {
+  color: var(--text-primary);
+}
+
+/* ── 分页控件 ─────────────────────────────────────────────── */
+.sc-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px 0 12px;
+}
+
+.btn-page {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.btn-page:hover:not(:disabled) {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+.btn-page:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.page-info {
+  font-size: 14px;
+  color: var(--text-muted);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* ── 无题目 ─────────────────────────────────────────────── */
+.sc-no-questions {
+  text-align: center;
+  color: var(--text-hint);
+  padding: 40px;
+}
+
+/* ── 生成更多 ─────────────────────────────────────────────── */
+.sc-more-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 40px;
+}
+
+.gen-hint {
+  font-size: 13px;
+  color: var(--text-hint);
+}
+
+/* ── 加载/错误 ────────────────────────────────────────────── */
+.sc-loading {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.sc-error {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--color-error);
+}
+
+.sc-error-msg {
+  color: var(--color-error);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+/* ── 流式生成进度 ────────────────────────────────────────── */
+.sc-streaming {
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  min-height: 200px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.sc-streaming h3 {
+  font-size: 16px;
+  color: var(--color-brand);
+  margin-bottom: 16px;
+}
+
+.sc-streaming-content {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* ── 响应式：窄屏改为上下布局 ────────────────────────────── */
+@media (max-width: 768px) {
+  .sc-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sc-left {
+    position: static;
+  }
+
+  .sc-kp-content {
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .sc-section-header h3 {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+
+  .sc-breadcrumb {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+}
